@@ -1,0 +1,252 @@
+/* Google Fonts - Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --font-family: 'Inter', sans-serif;
+  
+  /* Theme Colors (Default Light) */
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-sidebar: #0f172a;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --border-color: #e2e8f0;
+  
+  /* Status Colors */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --color-info: #3b82f6;
+
+  /* Role Palettes (Defaults, dynamically overridden by body data-role attributes) */
+  --theme-primary: #3b82f6;
+  --theme-primary-hover: #1d4ed8;
+  --theme-glow: rgba(59, 130, 246, 0.15);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+
+  --transition-speed: 0.3s;
+}
+
+/* Dark Mode Variables */
+[data-theme="dark"] {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-sidebar: #020617;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #64748b;
+  --border-color: #334155;
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+}
+
+/* Role Specific Theming */
+[data-role="SUPER_ADMIN"] {
+  --theme-primary: #8b5cf6;
+  --theme-primary-hover: #6d28d9;
+  --theme-glow: rgba(139, 92, 246, 0.15);
+}
+
+[data-role="HR_MANAGER"] {
+  --theme-primary: #0d9488;
+  --theme-primary-hover: #0f766e;
+  --theme-glow: rgba(13, 148, 136, 0.15);
+}
+
+[data-role="DEPARTMENT_MANAGER"] {
+  --theme-primary: #2563eb;
+  --theme-primary-hover: #1d4ed8;
+  --theme-glow: rgba(37, 99, 235, 0.15);
+}
+
+[data-role="TEAM_LEAD"] {
+  --theme-primary: #ea580c;
+  --theme-primary-hover: #c2410c;
+  --theme-glow: rgba(234, 88, 12, 0.15);
+}
+
+[data-role="EMPLOYEE"] {
+  --theme-primary: #64748b;
+  --theme-primary-hover: #475569;
+  --theme-glow: rgba(100, 116, 139, 0.15);
+}
+
+/* Core Settings */
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color var(--transition-speed), color var(--transition-speed);
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* App Layout */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  background-color: var(--bg-primary);
+  margin-left: 260px; /* Width of Sidebar */
+  transition: margin-left var(--transition-speed), background-color var(--transition-speed);
+}
+
+@media (max-width: 992px) {
+  .main-content {
+    margin-left: 0;
+    padding: 1rem;
+  }
+}
+
+/* Sidebar Styling */
+.sidebar {
+  width: 260px;
+  background-color: var(--bg-sidebar);
+  color: #f8fafc;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-lg);
+  transition: transform var(--transition-speed);
+}
+
+.sidebar-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sidebar-brand {
+  font-weight: 700;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #fff;
+  text-decoration: none;
+}
+
+.sidebar-menu {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem 0;
+  list-style: none;
+  margin: 0;
+}
+
+.sidebar-item {
+  padding: 0.25rem 1rem;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: #94a3b8;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all var(--transition-speed);
+}
+
+.sidebar-link:hover, .sidebar-link.active {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.05);
+  box-shadow: inset 4px 0 0 0 var(--theme-primary);
+}
+
+.sidebar-footer {
+  padding: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Custom Cards */
+.card-custom {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-md);
+  padding: 1.5rem;
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed), background-color var(--transition-speed);
+}
+
+.card-custom:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Buttons */
+.btn-primary-custom {
+  background-color: var(--theme-primary);
+  border-color: var(--theme-primary);
+  color: #fff;
+  font-weight: 500;
+  transition: all var(--transition-speed);
+}
+.btn-primary-custom:hover, .btn-primary-custom:focus {
+  background-color: var(--theme-primary-hover);
+  border-color: var(--theme-primary-hover);
+  box-shadow: 0 0 0 0.25rem var(--theme-glow);
+}
+
+/* Forms */
+.form-control:focus, .form-select:focus {
+  border-color: var(--theme-primary);
+  box-shadow: 0 0 0 0.25rem var(--theme-glow);
+}
+
+/* Glassmorphism Card Variation */
+.card-glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Micro-animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* Stat Cards Colors */
+.stat-card-purple { border-left: 4px solid #8b5cf6; }
+.stat-card-teal { border-left: 4px solid #0d9488; }
+.stat-card-blue { border-left: 4px solid #2563eb; }
+.stat-card-orange { border-left: 4px solid #ea580c; }
+.stat-card-red { border-left: 4px solid #ef4444; }
+.stat-card-green { border-left: 4px solid #10b981; }

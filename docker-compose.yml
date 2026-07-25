@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  mysql-db:
+    image: mysql:8.0
+    container_name: ems-mysql
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: employee_management_system
+      MYSQL_ROOT_PASSWORD: root
+      TZ: Asia/Kolkata
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend-api:
+    build: ./backend
+    container_name: ems-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - DATABASE_HOST=mysql-db
+      - DATABASE_PORT=3306
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=root
+      - JWT_SECRET=9a67471ec635a1a1f0a28b030b42f6e97dbefd96bb315b9c02d1844b2f15a31b
+      - UPLOAD_DIR=/app/uploads
+      - TZ=Asia/Kolkata
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+    volumes:
+      - ems-uploads:/app/uploads
+
+  frontend-ui:
+    build: ./frontend
+    container_name: ems-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend-api
+
+volumes:
+  mysql-data:
+  ems-uploads:
