@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import api from '../services/api';
+import api, { SERVER_BASE_URL } from '../services/api';
 
 const Profile = () => {
   const { user, updateUserProfile } = useContext(AuthContext);
@@ -164,7 +164,7 @@ const Profile = () => {
         <div className="col-12 col-md-4 text-center border-end">
           <div className="mb-4">
             <img
-              src={profile?.photoPath ? `http://localhost:8080${profile.photoPath}` : 'https://via.placeholder.com/150'}
+              src={profile?.photoPath ? `${SERVER_BASE_URL}${profile.photoPath}` : 'https://via.placeholder.com/150'}
               alt="Avatar"
               className="rounded-circle shadow-sm mb-3"
               width="150"

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import api from '../services/api';
+import api, { SERVER_BASE_URL } from '../services/api';
 
 const DeptEmployees = () => {
   const { user } = useContext(AuthContext);
@@ -66,7 +66,7 @@ const DeptEmployees = () => {
                   <tr key={emp.id}>
                     <td>
                       <img
-                        src={emp.photoPath ? `http://localhost:8080${emp.photoPath}` : 'https://via.placeholder.com/40'}
+                        src={emp.photoPath ? `${SERVER_BASE_URL}${emp.photoPath}` : 'https://via.placeholder.com/40'}
                         alt="avatar"
                         className="rounded-circle"
                         width="40"

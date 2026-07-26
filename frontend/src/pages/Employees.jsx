@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import api from '../services/api';
+import api, { SERVER_BASE_URL } from '../services/api';
 
 const Employees = () => {
   const [employees, setEmployees] = useState([]);
@@ -261,7 +261,7 @@ const Employees = () => {
                 <tr key={emp.id}>
                   <td>
                     <img
-                      src={emp.photoPath ? `http://localhost:8080${emp.photoPath}` : 'https://via.placeholder.com/40'}
+                      src={emp.photoPath ? `${SERVER_BASE_URL}${emp.photoPath}` : 'https://via.placeholder.com/40'}
                       alt="avatar"
                       className="rounded-circle"
                       width="40"
